@@ -7,9 +7,9 @@ interface LoadingProps{
 /**
  * Un indicateur de chargement
  * @param {LoadingProps} options Les options de l'indicateur
- * @return {()} L'indicateur
+ * @return {JSX.Element} L'indicateur
  */
-export default function Loading(options : LoadingProps) {
+export default function Loading(options : LoadingProps): JSX.Element {
 	const {size, background, color} = options;
 
 	return (
