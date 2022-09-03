@@ -20,21 +20,25 @@ interface OutlinedButtonProps {
 export default function OutlinedButton(options: OutlinedButtonProps): JSX.Element {
 	const colors = {
 		text: 'text-white',
+		icon: 'fill-white',
 		border: 'bg-primary-color',
 	};
 
 	// On doit définir la couleur en fonction du type
 	if (!!options.isDisabled) {
 		colors.text = 'text-light-grey-3';
+		colors.icon = 'fill-light-grey-3';
 		colors.border = 'bg-light-grey-2';
 	} else {
 		switch (options.color) {
 		case 'primary':
 			colors.text = 'text-primary-color';
+			colors.icon = 'fill-primary-color';
 			colors.border = 'border-primary-color';
 			break;
 		case 'secondary':
 			colors.text = 'text-white';
+			colors.icon = 'fill-white';
 			colors.border = 'border-secondary-color';
 			break;
 		}
@@ -63,7 +67,7 @@ export default function OutlinedButton(options: OutlinedButtonProps): JSX.Elemen
 				// Le contenue normal du bouton
 				<div className='flex items-center justify-center'>
 					{options.icon && (
-						<div className={`h-4 w-4 ${colors.text}`}>
+						<div className={`h-4 w-4 ${colors.icon}`}>
 							{options.icon}
 						</div>
 					)}
