@@ -1,5 +1,7 @@
+import {ApolloProvider} from '@apollo/client';
 import {AppProps} from 'next/app';
 import '../../styles/globals.css';
+import client from '../apollo/client';
 
 /**
  * L'objet application
@@ -7,7 +9,11 @@ import '../../styles/globals.css';
  * @return {JSX.Element} le HTML de l'application
  */
 function MyApp({Component, pageProps}: AppProps): JSX.Element {
-	return <Component {...pageProps} />;
+	return (
+		<ApolloProvider client={client}>
+			<Component {...pageProps} />
+		</ApolloProvider>
+	);
 }
 
 export default MyApp;
