@@ -5,6 +5,7 @@ import Link from 'next/link';
 import client from '../../apollo/client';
 import Card from '../../components/atoms/card';
 import Layout from '../../components/organisms/layout';
+import Pagination from '../../components/organisms/pagination';
 import slugify from '../../helpers/slugify';
 import {CommerceConnection} from '../../interfaces/commerce';
 
@@ -47,6 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	return {
 		props: {
+			totalCount: data.commerces.totalCount,
 			commerces: data.commerces,
 			currentPage: page,
 		},
@@ -54,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 interface ListCommercesProps {
+	totalCount: number
 	commerces: CommerceConnection
 	currentPage: number
 }
@@ -63,15 +66,15 @@ interface ListCommercesProps {
  * @param {ListCommercesProps} options Les propriétés de la page
  * @return {JSX.Element} La page de la liste des commerces
  */
-export default function listCommerces(options: ListCommercesProps) {
-	const {commerces, currentPage} = options;
+export default function listCommerces(options: ListCommercesProps): JSX.Element {
+	const {totalCount, commerces, currentPage} = options;
 
 	return (
 		<Layout title={'Commerce - page ' + (currentPage + 1)}>
 			<div className='w-full h-full'>
 				<div className='w-full h-full grid grid-cols-2 gap-1'>
-					<div className='w-full h-full flex flex-col'>
-						<div className='flex-grow'>
+					<div className='w-full h-full flex flex-col items-center'>
+						<div className='flex-grow w-full'>
 							{commerces.edges.map((commerce) => (
 								<Link
 									key={commerce.node.id}
@@ -88,7 +91,10 @@ export default function listCommerces(options: ListCommercesProps) {
 								</Link>
 							))}
 						</div>
-						<div className='bg-pink-500 w-full max-w-xl h-[64px]'></div>
+						<Pagination
+							currentPage={currentPage + 1}
+							nbPage={totalCount / NB_COMMERCES_PER_PAGES}
+							uri={'/commerces/'} />
 					</div>
 					<div className='relative'>
 						<Image src="/temps_map.png" alt="L'image de la carte des commerces" layout='fill' objectFit='cover'/>
