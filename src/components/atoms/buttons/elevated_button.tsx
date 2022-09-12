@@ -5,6 +5,7 @@ interface ElevatedButtonProps {
 	icon? : ReactNode
 	label : string
 	onClick? : MouseEventHandler<HTMLButtonElement>
+	href? : string
 	isDisabled? : boolean
 	isLoading? : boolean
 	color? : 'primary' | 'secondary'
@@ -46,6 +47,41 @@ export default function ElevatedButton(options: ElevatedButtonProps): JSX.Elemen
 			colors.border = 'border-secondary-color';
 			break;
 		}
+	}
+
+	if (options.href != undefined) {
+		return (
+			<a
+				href={options.href}
+				className={
+					'p-2 px-4 block rounded-[8px] border border-1' +
+					(!!options.isDisabled && 'cursor-default pointer-events-none') + ' ' +
+					(colors.background) + ' ' + (colors.border) + ' ' + (colors.text)
+				}
+			>
+				{!!options.isLoading ? (
+					// Si le bouton affiche un chargement
+					<div className='flex items-center justify-center'>
+						<Loading
+							color='white'
+							size={20}
+						/>
+						<span className='ml-3'>Chargement...</span>
+					</div>
+				) : (
+					// Le contenue normal du bouton
+					<div className='flex items-center justify-center'>
+						{options.icon && (
+							<div className={`h-5 w-5 ${colors.icon}`}>
+								{options.icon}
+							</div>
+						)}
+						<span className={options.icon ? 'ml-2' : ''}>{options.label}</span>
+					</div>
+				)}
+
+			</a>
+		);
 	}
 
 	return (
