@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import {Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState} from 'react';
-import {AccueilSVG, PanierPermanentSVG, RechercheCommercesSVG} from '../../assets/icons';
+import {AccueilSVG, ClickAndCollectSVG, RechercheCommercesSVG} from '../../assets/icons';
 import ElevatedButton from '../atoms/buttons/elevated_button';
 import MenuButton from '../molecule/menu_button';
 
@@ -87,7 +87,7 @@ export default function Aside(options: AsideProps) {
 						href="/" />
 
 					<MenuButton
-						icon={<PanierPermanentSVG/>}
+						icon={<ClickAndCollectSVG/>}
 						label="Mon Panier"
 						href='/basket' />
 				</div>

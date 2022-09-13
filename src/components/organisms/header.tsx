@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import {useState} from 'react';
 import {MenuSVG} from '../../assets/svg';
 import ElevatedButton from '../atoms/buttons/elevated_button';
@@ -33,6 +34,15 @@ export default function Header(options: HeaderProps): JSX.Element {
 					/>
 				)}
 				<p className='ml-4'>{title}</p>
+			</div>
+			<div>
+				<ElevatedButton
+					label='Se connecter'
+					color='secondary'
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					onClick={(_) => {
+						Router.push('/login');
+					}} />
 			</div>
 		</header>
 	);

@@ -66,7 +66,7 @@ interface ListCommercesProps {
  * @param {ListCommercesProps} options Les propriétés de la page
  * @return {JSX.Element} La page de la liste des commerces
  */
-export default function listCommerces(options: ListCommercesProps): JSX.Element {
+export default function ListCommerces(options: ListCommercesProps): JSX.Element {
 	const {totalCount, commerces, currentPage} = options;
 
 	return (
