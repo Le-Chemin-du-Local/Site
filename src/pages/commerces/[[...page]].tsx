@@ -74,7 +74,7 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 			<div className='w-full h-full'>
 				<div className='w-full h-full grid grid-cols-2 gap-1'>
 					<div className='w-full h-full flex flex-col items-center'>
-						<div className='flex-grow w-full'>
+						<div className='flex-grow justify-center w-full'>
 							{commerces.edges.map((commerce) => (
 								<Link
 									key={commerce.node.id}
@@ -82,7 +82,7 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 									/commerce/${encodeURIComponent(commerce.node.id ?? '')}/${encodeURIComponent(slugify(commerce.node.storekeeperWord ?? ''))}
 									`}
 								>
-									<a className='block w-full max-w-7xl'>
+									<a className='block w-full px-8'>
 										<Card className='mb-0'>
 											<h2 className='text-2xl'>{commerce.node.name ?? 'Nom inconnu'}</h2>
 											<span>{commerce.node.storekeeperWord ?? 'Le commerce n\'a pas d\'informations'}</span>

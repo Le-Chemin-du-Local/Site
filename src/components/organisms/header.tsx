@@ -6,7 +6,7 @@ import Aside from './aside';
 import useUser from '../../helpers/useUser';
 import {User} from '../../interfaces/user';
 import clientWithHeader from '../../apollo/client_with_header';
-import { gql } from '@apollo/client';
+import {gql} from '@apollo/client';
 
 interface HeaderProps {
     title? : string;
