@@ -75,7 +75,7 @@ export default function Aside(options: AsideProps) {
 						<ElevatedButton
 							label='Tous les commercers'
 							color='secondary'
-							href='/commerces/1'
+							href='/commerces/'
 							icon={<RechercheCommercesSVG/>}
 						/>
 					</div>

@@ -1,3 +1,5 @@
+import {Address} from './address';
+
 export interface CommerceConnection{
     totalCount: number;
 	edges: Array<CommerceEdge>;
@@ -21,7 +23,7 @@ export interface Commerce{
 	name?: string;
 	description?: string;
 	storekeeperWord?: string;
-	// address?: Address;
+	address?: Address;
 	latitude?: number;
 	longitude?: number;
 	phone?: string;

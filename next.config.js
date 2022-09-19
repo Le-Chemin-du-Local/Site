@@ -5,6 +5,13 @@ const nextConfig = {
 
 module.exports = {
 	...nextConfig,
+	images: {
+		domains: [
+			'localhost',
+			'api-beta.chemin-du-local.bzh',
+			'chemin-du-local.bzh',
+		],
+	},
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/,
@@ -12,5 +19,19 @@ module.exports = {
 		});
 
 		return config;
+	},
+	async redirects() {
+		return [
+			{
+				source: '/commerces',
+				destination: '/commerces/page/1',
+				permanent: true,
+			},
+			{
+				source: '/commerces/:slug(\\d{1,})',
+				destination: '/commerces/page/:slug',
+				permanent: true,
+			},
+		];
 	},
 };

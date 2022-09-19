@@ -2,12 +2,12 @@ import {gql} from '@apollo/client';
 import {GetServerSideProps} from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import client from '../../apollo/client';
-import Card from '../../components/atoms/card';
-import Layout from '../../components/organisms/layout';
-import Pagination from '../../components/organisms/pagination';
-import slugify from '../../helpers/slugify';
-import {CommerceConnection} from '../../interfaces/commerce';
+import client from '../../../apollo/client';
+import Card from '../../../components/atoms/card';
+import Layout from '../../../components/organisms/layout';
+import Pagination from '../../../components/organisms/pagination';
+import slugify from '../../../helpers/slugify';
+import {CommerceConnection} from '../../../interfaces/commerce';
 
 const NB_COMMERCES_PER_PAGES = 1;
 
@@ -79,7 +79,7 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 								<Link
 									key={commerce.node.id}
 									href={`
-									/commerce/${encodeURIComponent(commerce.node.id ?? '')}/${encodeURIComponent(slugify(commerce.node.storekeeperWord ?? ''))}
+									/commerces/${encodeURIComponent(commerce.node.id ?? '')}/${encodeURIComponent(slugify(commerce.node.storekeeperWord ?? ''))}
 									`}
 								>
 									<a className='block w-full px-8'>
@@ -94,7 +94,7 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 						<Pagination
 							currentPage={currentPage + 1}
 							nbPage={totalCount / NB_COMMERCES_PER_PAGES}
-							uri={'/commerces/'} />
+							uri={'/commerces/page/'} />
 					</div>
 					<div className='relative'>
 						<Image src="/temps_map.png" alt="L'image de la carte des commerces" layout='fill' objectFit='cover'/>
