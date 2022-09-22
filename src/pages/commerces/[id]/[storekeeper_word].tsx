@@ -109,19 +109,19 @@ export default function CommercePage(options: CommercePageProps) {
 		<Layout title={`Commerce : ${commerce.name}`}>
 			{/* Bannière du profil */}
 			<div
-				className={'w-full h-[416px] fixed top-0 flex items-center justify-center z-0'}
+				className={'w-full h-[464px] fixed top-0 flex items-center justify-center z-0'}
 			>
 				<ImageFallback
-					className="h-[416px] mb-5 z-0"
+					className="h-[464px] mb-5 z-0"
 					src={`${BACKEND_URL}/static/commerces/${commerce.id}/header.jpg`}
 					fallbackSrc='/images/placeholder.webp'
 					alt="logo de base d'une image"
 					layout='fill' objectFit='cover'
 				/>
 
-				<div className='w-full h-[416px] bg-gradient-to-b from-transparent to-[#000]  z-0'/>
+				<div className='w-full h-[464px] bg-gradient-to-b from-transparent to-[#000]  z-0'/>
 				{/* Icône de profil et	*/}
-				<div className="absolute bottom-8 left-12 flex items-center">
+				<div className="absolute bottom-20 left-12 flex items-center">
 					<div className="h-24 w-24 bg-[#fafafe] rounded-full relative flex items-center justify-center">
 						<ImageFallback
 							className="h-2/4 rounded-full"
@@ -136,8 +136,8 @@ export default function CommercePage(options: CommercePageProps) {
 			</div>
 
 			{/* Détails du commerce*/}
-			<div className='z-10 mt-[370px] bg-[#fafafa] w-full h-full grid gap-x-4 px-4 lg:px-16'>
-				<div className='translate-y-[-60px] lg:col-start-1 lg:row-start-1 col-start-1 row-start-2 min-w-0 justify-end items-end content-end'>
+			<div className='z-10 mt-[464px] bg-[#fafafa] w-full h-full grid gap-x-4 px-4 lg:px-16'>
+				<div className='translate-y-[-100px] lg:col-start-1 lg:row-start-1 col-start-1 row-start-2 min-w-0 justify-end items-end content-end'>
 					<div className='lg:max-w-[700px] lg:ml-auto'>
 						<div className='h-4 lg:hidden' />
 						<Card>
@@ -164,7 +164,7 @@ export default function CommercePage(options: CommercePageProps) {
 						</div>
 					</div>
 				</div>
-				<div className='translate-y-[-60px] lg:w-[400px] lg:col-start-2 col-start-1 row-start-1'>
+				<div className='translate-y-[-100px] lg:w-[400px] lg:col-start-2 col-start-1 row-start-1'>
 					<Card>
 						{commerce.businessHours ?
 							<BusinessHoursCard businessHours={commerce.businessHours} /> :

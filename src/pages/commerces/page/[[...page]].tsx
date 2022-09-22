@@ -73,7 +73,7 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 		<Layout title={'Commerce - page ' + (currentPage + 1)}>
 			<div className='w-full h-full'>
 				<div className='w-full h-full grid grid-cols-2 gap-1'>
-					<div className='w-full h-full flex flex-col items-center'>
+					<div className='w-full h-full flex flex-col items-center pt-4'>
 						<div className='flex-grow justify-center w-full'>
 							{commerces.edges.map((commerce) => (
 								<Link

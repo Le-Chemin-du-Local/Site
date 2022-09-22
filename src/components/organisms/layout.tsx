@@ -17,7 +17,7 @@ export default function Layout(options : LayoutProps): JSX.Element {
 	return (
 		<>
 			<Header title={title}/>
-			<main className="flex flex-col items-center grow w-full mt-20">
+			<main className="flex flex-col items-center grow w-full mt-16">
 				{children}
 			</main>
 		</>
