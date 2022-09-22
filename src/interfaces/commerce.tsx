@@ -1,4 +1,5 @@
 import {Address} from './address';
+import {ProductConnection} from './product';
 
 export interface CommerceConnection{
     totalCount: number;
@@ -34,7 +35,7 @@ export interface Commerce{
 	businessHours?: BusinessHours;
 	clickAndCollectHours?: BusinessHours;
 	categories?: Array<string>;
-	// products?: ProductConnection;
+	products?: ProductConnection;
 	services?: Array<string>;
 	// productsAvailableForClickAndCollect?: Array<Product>;
 	// paniers?: PanierConnection;

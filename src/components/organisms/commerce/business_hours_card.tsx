@@ -1,5 +1,5 @@
 import {BusinessHours} from '../../../interfaces/commerce';
-import DayUnit from './day_unit';
+import DayUnit from '../../atoms/commerce/day_unit';
 
 interface BusinessHoursCardProps {
 	businessHours: BusinessHours;

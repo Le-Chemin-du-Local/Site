@@ -1,11 +1,12 @@
 import {gql} from '@apollo/client';
 import {GetServerSideProps} from 'next';
-import Image from 'next/image';
 import client from '../../../apollo/client';
 import Card from '../../../components/atoms/card';
-import BusinessHoursCard from '../../../components/atoms/commerce/business_hours_card';
-import InformationsCard from '../../../components/atoms/commerce/informations_card';
+import ImageFallback from '../../../components/atoms/image_fallback';
+import BusinessHoursCard from '../../../components/organisms/commerce/business_hours_card';
+import InformationsCard from '../../../components/organisms/commerce/informations_card';
 import Layout from '../../../components/organisms/layout';
+import ProductCard from '../../../components/organisms/products/products_card';
 import {BACKEND_URL} from '../../../constants/config';
 import {Commerce} from '../../../interfaces/commerce';
 
@@ -70,6 +71,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 						closing
 					}
 				}
+				products(first: 6) {
+					edges {
+						node {
+							id
+							name
+							price
+							unit
+							isBreton
+						}
+					}
+				}
 			}
 		}
 		`,
@@ -99,9 +111,10 @@ export default function CommercePage(options: CommercePageProps) {
 			<div
 				className={'w-full h-[416px] fixed top-0 flex items-center justify-center z-0'}
 			>
-				<Image
+				<ImageFallback
 					className="h-[416px] mb-5 z-0"
 					src={`${BACKEND_URL}/static/commerces/${commerce.id}/header.jpg`}
+					fallbackSrc='/images/placeholder.webp'
 					alt="logo de base d'une image"
 					layout='fill' objectFit='cover'
 				/>
@@ -110,9 +123,10 @@ export default function CommercePage(options: CommercePageProps) {
 				{/* Icône de profil et	*/}
 				<div className="absolute bottom-8 left-12 flex items-center">
 					<div className="h-24 w-24 bg-[#fafafe] rounded-full relative flex items-center justify-center">
-						<Image
+						<ImageFallback
 							className="h-2/4 rounded-full"
 							src={`${BACKEND_URL}/static/commerces/${commerce.id}/profile.jpg`}
+							fallbackSrc='/images/placeholder.webp'
 							alt="logo de base d'une image"
 							layout='fill' objectFit='cover'
 						/>
@@ -122,26 +136,33 @@ export default function CommercePage(options: CommercePageProps) {
 			</div>
 
 			{/* Détails du commerce*/}
-			<div className='z-10 mt-[370px] bg-[#fafafa] h-full grid gap-x-4 px-4 lg:px-16'>
-				<div className='translate-y-[-60px] lg:col-start-1 lg:row-start-1 col-start-1 row-start-2'>
-					<Card>
-						<p>{commerce.description}</p>
-					</Card>
-					<div className='h-4' />
-					<Card>
-						<p className='text-3xl'>
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-							Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits Produits
-						</p>
-					</Card>
+			<div className='z-10 mt-[370px] bg-[#fafafa] w-full h-full grid gap-x-4 px-4 lg:px-16'>
+				<div className='translate-y-[-60px] lg:col-start-1 lg:row-start-1 col-start-1 row-start-2 min-w-0 justify-end items-end content-end'>
+					<div className='lg:max-w-[700px] lg:ml-auto'>
+						<div className='h-4 lg:hidden' />
+						<Card>
+							<p>{commerce.description}</p>
+						</Card>
+						<div className='h-4' />
+						<div className='min-w-0 overflow-x-auto'>
+							<div className='overflow-x-auto'>
+								<div className='lg:grid lg:grid-cols-3 lg:gap-4 flex'>
+									{commerce.products?.edges.map((edge) => (
+										<>
+											<Card
+												key={edge.node.id}
+												className='min-w-[187px] mix-blend-multiply'
+											>
+												<ProductCard product={edge.node} />
+											</Card>
+											<div className='w-4 md:hidden sm:hidden' />
+										</>
+									))
+									}
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div className='translate-y-[-60px] lg:w-[400px] lg:col-start-2 col-start-1 row-start-1'>
 					<Card>
