@@ -6,6 +6,7 @@ import client from '../../../apollo/client';
 import Card from '../../../components/atoms/card';
 import Layout from '../../../components/organisms/layout';
 import Pagination from '../../../components/organisms/pagination';
+import {BACKEND_URL} from '../../../constants/config';
 import slugify from '../../../helpers/slugify';
 import {CommerceConnection} from '../../../interfaces/commerce';
 
@@ -17,11 +18,48 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const cursorString = 'offset:' + (page * NB_COMMERCES_PER_PAGES).toString();
 	const cursor = btoa(cursorString);
 
+	const location = context.query?.location as string;
+	let latitude = undefined;
+	let longitude = undefined;
+
+	if (location != undefined) {
+		const autocompleteResponse = await fetch(`${BACKEND_URL}/maps/autocomplete`, {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({
+				'input': encodeURIComponent(location),
+			}),
+		});
+
+		if (autocompleteResponse.ok) {
+			const detailledLocations = await autocompleteResponse.json();
+
+			if (detailledLocations.status == 'OK') {
+				const locationDetailsResponse = await fetch(`${BACKEND_URL}/maps/details`, {
+					method: 'POST',
+					headers: {'Content-Type': 'application/json'},
+					body: JSON.stringify({
+						'placeID': detailledLocations.predictions[0].place_id,
+					}),
+				});
+
+				if (locationDetailsResponse.ok) {
+					const locationDetails = await locationDetailsResponse.json();
+
+					if (locationDetails.status == 'OK') {
+						latitude = locationDetails.result.geometry.location.lat,
+						longitude = locationDetails.result.geometry.location.lng;
+					}
+				}
+			}
+		}
+	}
+
 	const {data} = await client.query({
 		query:
 		gql`
-			query commerces($first: Int, $after: String) {
-				commerces(first: $first, after: $after) {
+			query commerces($first: Int, $after: String, $filter: CommerceFilter) {
+				commerces(first: $first, after: $after, filter: $filter) {
 					totalCount
 					edges {
 						node {
@@ -37,6 +75,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		variables: {
 			first: NB_COMMERCES_PER_PAGES,
 			after: cursor,
+			filter: latitude == undefined ? undefined : {
+				nearLatitude: latitude,
+				nearLongitude: longitude,
+			},
 		},
 	});
 
