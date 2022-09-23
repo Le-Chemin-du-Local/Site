@@ -72,7 +72,7 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 	return (
 		<Layout title='Bienvenue sur le Chemin du Local'>
 			<div className='
-				bg-illustration-click-and-collect bg-fixed bg-cover bg-center min-h-[94vh] w-full flex
+				bg-illustration-4 bg-fixed bg-cover bg-center min-h-[94vh] w-full flex
 			'>
 				<div className='px-8 lg:px-24 pt-[18vh] pb-8'>
 					<Image
@@ -102,22 +102,34 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 					<div className='h-4' />
 					<div className='flex flex-col sm:flex-row items-center w-full '>
 						{/* Carte pour les commerçant */}
-						<Card className='flex flex-col items-center w-full'>
-							<div className='w-32 h-32'>
-								<PanierFlashSVG />
+						<Card className='flex flex-col w-full'>
+							<div className='w-full h-40 relative'>
+								<Image
+									className='rounded-xl'
+									src="/images/illustration_1.png"
+									alt="Un panier"
+									layout="fill" objectFit="cover" />
 							</div>
+							<div className='h-4' />
 							<h2 className='text-xl'>Je suis commerçant</h2>
+							<div className='h-2' />
 							<ElevatedButton label='Vendre' />
 						</Card>
 
 						<div className='h-8 w-8' />
 
 						{/* Carte pour les clients */}
-						<Card className='flex flex-col items-center w-full'>
-							<div className='w-32 h-32'>
-								<ClickAndCollectSVG />
+						<Card className='flex flex-col w-full'>
+							<div className='w-full h-40 relative'>
+								<Image
+									className='rounded-xl'
+									src="/images/illustration_click_and_collect.png"
+									alt="Un panier"
+									layout="fill" objectFit="cover" />
 							</div>
+							<div className='h-4' />
 							<h2 className='text-xl'>Je suis client</h2>
+							<div className='h-2' />
 							<ElevatedButton
 								label='Acheter'
 								href='/commerces/page/1'

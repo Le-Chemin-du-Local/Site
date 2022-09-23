@@ -47,6 +47,7 @@ export default function AddressInput(options: AddressInputProps) {
 				<input
 					id={inputName}
 					name={inputName}
+					autoComplete="off"
 					onFocus={onFocus}
 					onChange={onChange}
 					type={inputType}
@@ -58,7 +59,7 @@ export default function AddressInput(options: AddressInputProps) {
 				{(showSuggestions && userInput.length > 0) && (
 					<>
 						{(filteredSuggestions.length > 0) ? (
-							<ul className='bg-white border border-[#999] max-h-40 overflow-y-auto absolute top-[40px] w-full'>
+							<ul className='z-10 bg-white border border-[#999] max-h-40 overflow-y-auto absolute top-[40px] w-full'>
 								{filteredSuggestions.map((suggestion) => {
 									return (
 										<li
