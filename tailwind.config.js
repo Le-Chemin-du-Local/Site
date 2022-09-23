@@ -5,6 +5,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			fontFamily: {
+				Rubik: ['Rubik', 'sans-serif'],
+			},
 			colors: {
 				'primary-color': '#ff5858',
 				'secondary-color': '#ff8c60',
@@ -22,6 +25,13 @@ module.exports = {
 				'success-container': '#B8FFBA',
 				'warning-container': '#F4BD2A',
 				'information-container': '#36A2B1',
+			},
+			backgroundImage: {
+				'illustration-1': 'url("/images/illustration_1.png")',
+				'illustration-2': 'url("/images/illustration_2.png")',
+				'illustration-3': 'url("/images/illustration_3.png")',
+				'illustration-4': 'url("/images/illustration_4.png")',
+				'illustration-click-and-collect': 'url("/images/illustration_click_and_collect.png")',
 			},
 		},
 	},

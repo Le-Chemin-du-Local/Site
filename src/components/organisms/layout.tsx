@@ -1,4 +1,5 @@
 import {ReactNode} from 'react';
+import Footer from './footer';
 import Header from './header';
 
 interface LayoutProps{
@@ -20,6 +21,7 @@ export default function Layout(options : LayoutProps): JSX.Element {
 			<main className="flex flex-col items-center grow w-full mt-16">
 				{children}
 			</main>
+			<Footer/>
 		</>
 	);
 }
