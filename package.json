@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.6",
     "@svgr/webpack": "^6.2.1",
     "graphql": "^16.6.0",
     "iron-session": "^6.2.1",

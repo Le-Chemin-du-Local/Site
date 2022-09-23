@@ -1,11 +1,14 @@
 import {gql} from '@apollo/client';
+import {Search} from '@mui/icons-material';
 import {GetServerSideProps} from 'next';
 import Image from 'next/image';
+import Router from 'next/router';
+import {FormEvent} from 'react';
 import client from '../apollo/client';
 import {ClickAndCollectSVG, PanierFlashSVG} from '../assets/icons';
 import ElevatedButton from '../components/atoms/buttons/elevated_button';
 import Card from '../components/atoms/card';
-import TextInput from '../components/molecule/inputs/text_input';
+import AddressInput from '../components/molecule/inputs/address_input';
 import CommerceCard from '../components/organisms/commerce/commerce_card';
 import Layout from '../components/organisms/layout';
 import {CommerceConnection} from '../interfaces/commerce';
@@ -61,6 +64,11 @@ interface HomePagePropsProps {
 export default function Main(options: HomePagePropsProps): JSX.Element {
 	const {commerces} = options;
 
+	const onSearchForCommerce = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		Router.push(`commerces/page/1?location=${encodeURIComponent(event.currentTarget.city.value)}`);
+	};
+
 	return (
 		<Layout title='Bienvenue sur le Chemin du Local'>
 			<div className='
@@ -75,10 +83,21 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 					/>
 					<Card className='mt-[-23px]'>
 						<h1 className='text-2xl'>Retrouvez des commerces locaux autours de chez vous ! 👋</h1>
-						<TextInput
-							inputName='city'
-							placeholder='Où êtes vous en ce moment ?'
-						/>
+						<div className='h-4' />
+						<form className='flex flex-row' onSubmit={onSearchForCommerce}>
+							<AddressInput
+								isRequired
+								inputName='city'
+								placeholder='Où êtes vous en ce moment ?'
+							/>
+							<div className='w-4' />
+							<ElevatedButton
+								color='secondary'
+								label=''
+								icon={<Search />}
+								isSubmitButton
+							/>
+						</form>
 					</Card>
 					<div className='h-4' />
 					<div className='flex flex-col sm:flex-row items-center w-full '>
