@@ -65,7 +65,7 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 
 	const onSearchForCommerce = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		Router.push(`commerces/page/1?location=${encodeURIComponent(event.currentTarget.city.value)}`);
+		Router.push(`/commerces/page/1?location=${encodeURIComponent(event.currentTarget.city.value)}`);
 	};
 
 	return (

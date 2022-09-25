@@ -4,6 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 
 interface AddressInputProps {
 	inputName: string;
+	initialValue?: string;
 	inputType?: string;
 	placeholder?: string;
 	label?: string;
@@ -17,10 +18,10 @@ interface AddressInputProps {
  * @return {JSX.Element} Le champ pour rentrer une adresse
  */
 export default function AddressInput(options: AddressInputProps) {
-	const {inputName, inputType, placeholder, label, isRequired, onFocus} = options;
+	const {inputName, initialValue, inputType, placeholder, label, isRequired, onFocus} = options;
 
 	const [filteredSuggestions, setFilteredSuggestions] = useState(['']);
-	const [userInput, setUserInput] = useState('');
+	const [userInput, setUserInput] = useState(initialValue ?? '');
 	const [showSuggestions, setShowSuggestions] = useState(false);
 
 	const [sessiontoken, setSessiontoken] = useState('');

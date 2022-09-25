@@ -1,9 +1,14 @@
 import {gql} from '@apollo/client';
+import {Search} from '@mui/icons-material';
 import {GetServerSideProps} from 'next';
 import Image from 'next/image';
+import Router from 'next/router';
 import Link from 'next/link';
+import {FormEvent} from 'react';
 import client from '../../../apollo/client';
+import ElevatedButton from '../../../components/atoms/buttons/elevated_button';
 import Card from '../../../components/atoms/card';
+import AddressInput from '../../../components/molecule/inputs/address_input';
 import Layout from '../../../components/organisms/layout';
 import Pagination from '../../../components/organisms/pagination';
 import {BACKEND_URL} from '../../../constants/config';
@@ -91,6 +96,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	return {
 		props: {
 			totalCount: data.commerces.totalCount,
+			initialAddress: location ?? null,
 			commerces: data.commerces,
 			currentPage: page,
 		},
@@ -99,6 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 interface ListCommercesProps {
 	totalCount: number
+	initialAddress?: string
 	commerces: CommerceConnection
 	currentPage: number
 }
@@ -109,7 +116,12 @@ interface ListCommercesProps {
  * @return {JSX.Element} La page de la liste des commerces
  */
 export default function ListCommerces(options: ListCommercesProps): JSX.Element {
-	const {totalCount, commerces, currentPage} = options;
+	const {totalCount, initialAddress, commerces, currentPage} = options;
+
+	const onSearchForCommerce = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		Router.push(`/commerces/page/1?location=${encodeURIComponent(event.currentTarget.address.value)}`);
+	};
 
 	return (
 		<Layout title={'Commerce - page ' + (currentPage + 1)}>
@@ -117,6 +129,21 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 				<div className='w-full h-full grid grid-cols-2 gap-1'>
 					<div className='w-full h-full flex flex-col items-center pt-4'>
 						<div className='flex-grow justify-center w-full'>
+							<form className='flex flex-row px-8 pt-2 pb-4' onSubmit={onSearchForCommerce}>
+								<AddressInput
+									isRequired
+									initialValue={initialAddress}
+									inputName='address'
+									placeholder='Où êtes vous en ce moment ?'
+								/>
+								<div className='w-4' />
+								<ElevatedButton
+									color='secondary'
+									label=''
+									icon={<Search />}
+									isSubmitButton
+								/>
+							</form>
 							{commerces.edges.map((commerce) => (
 								<Link
 									key={commerce.node.id}
