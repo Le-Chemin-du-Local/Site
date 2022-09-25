@@ -1,4 +1,6 @@
 import {ChangeEvent, FocusEventHandler, MouseEvent, Fragment, useState} from 'react';
+import {BACKEND_URL} from '../../../constants/config';
+import {v4 as uuidv4} from 'uuid';
 
 interface AddressInputProps {
 	inputName: string;
@@ -21,16 +23,44 @@ export default function AddressInput(options: AddressInputProps) {
 	const [userInput, setUserInput] = useState('');
 	const [showSuggestions, setShowSuggestions] = useState(false);
 
+	const [sessiontoken, setSessiontoken] = useState('');
+
+
 	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
 		const input = event.currentTarget.value as string;
-
-		// TEMPS
-		const suggestions = ['Paris', 'Penmarch', 'Patata1', 'Patata1', 'Patata1', 'Patata1', 'Patata1', 'Patata1', 'Patata1', 'Patata1', 'Patata1', 'Rennes', 'Nantes'];
-
-		const filteredSuggestionsVar = suggestions.filter((suggestion) => suggestion.toLowerCase().indexOf(input.toLowerCase()) > -1);
-		setFilteredSuggestions(filteredSuggestionsVar);
-		setShowSuggestions(true);
 		setUserInput(input);
+
+		const sessionTokenString = sessiontoken.length > 0 ? `&sessiontoken=${sessiontoken}` : '';
+
+		const autocompleteResponse = await fetch(`${BACKEND_URL}/maps/autocomplete`, {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({
+				'input': encodeURIComponent(input),
+				'sessiontoken': sessionTokenString,
+			}),
+		});
+
+		console.log('Hello World !');
+		console.log(sessiontoken);
+
+		if (autocompleteResponse.ok) {
+			const responseData = await autocompleteResponse.json();
+
+			console.log(responseData);
+
+			const suggestions = [];
+			if (responseData.status == 'OK') {
+				for (let index = 0; index < responseData.predictions.length; index++) {
+					const prediction = responseData.predictions[index];
+
+					suggestions.push(prediction.description);
+				}
+			}
+
+			setFilteredSuggestions(suggestions);
+			setShowSuggestions(true);
+		}
 	};
 
 	const onClick = (event: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
@@ -48,7 +78,12 @@ export default function AddressInput(options: AddressInputProps) {
 					id={inputName}
 					name={inputName}
 					autoComplete="off"
-					onFocus={onFocus}
+					onFocus={(event) => {
+						setSessiontoken(uuidv4());
+						if (onFocus != undefined) {
+							onFocus(event);
+						}
+					}}
 					onChange={onChange}
 					type={inputType}
 					placeholder={placeholder}
@@ -71,8 +106,8 @@ export default function AddressInput(options: AddressInputProps) {
 								})}
 							</ul>
 						) : (
-							<div>
-								<p>Il n&apos;y a pas d&apos;adresses suggérées</p>
+							<div className='z-10 bg-white border border-[#999] max-h-40 overflow-y-auto absolute top-[40px] w-full'>
+								<p className='p-2'>Votre adresse n&apos;a pas été trouvée...</p>
 							</div>
 						)}
 					</>

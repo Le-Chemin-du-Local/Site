@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Router from 'next/router';
 import {FormEvent} from 'react';
 import client from '../apollo/client';
-import {ClickAndCollectSVG, PanierFlashSVG} from '../assets/icons';
 import ElevatedButton from '../components/atoms/buttons/elevated_button';
 import Card from '../components/atoms/card';
 import AddressInput from '../components/molecule/inputs/address_input';
