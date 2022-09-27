@@ -31,6 +31,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 				name
 				email
 				phone
+				latitude
+				longitude
 				description
 				storekeeperWord
 				address{
@@ -164,7 +166,7 @@ export default function CommercePage(options: CommercePageProps) {
 						</div>
 					</div>
 				</div>
-				<div className='translate-y-[-100px] lg:w-[400px] lg:col-start-2 col-start-1 row-start-1'>
+				<div className='translate-y-[-100px] lg:w-[460px] lg:col-start-2 col-start-1 row-start-1'>
 					<Card>
 						{commerce.businessHours ?
 							<BusinessHoursCard businessHours={commerce.businessHours} /> :
@@ -176,6 +178,8 @@ export default function CommercePage(options: CommercePageProps) {
 						<InformationsCard
 							email={commerce.email ?? ''}
 							phone={commerce.phone ?? ''}
+							latitude={commerce.latitude}
+							longitude={commerce.longitude}
 							address={commerce.address!} />
 					</Card>
 				</div>

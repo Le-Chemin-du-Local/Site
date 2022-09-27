@@ -5,6 +5,7 @@ const nextConfig = {
 
 module.exports = {
 	...nextConfig,
+	reactStrictMode: false,
 	images: {
 		domains: [
 			'localhost',

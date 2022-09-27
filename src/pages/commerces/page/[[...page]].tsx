@@ -1,10 +1,10 @@
 import {gql} from '@apollo/client';
 import {Search} from '@mui/icons-material';
 import {GetServerSideProps} from 'next';
-import Image from 'next/image';
 import Router from 'next/router';
 import Link from 'next/link';
 import {FormEvent} from 'react';
+import GoogleMapReact from 'google-map-react';
 import client from '../../../apollo/client';
 import ElevatedButton from '../../../components/atoms/buttons/elevated_button';
 import Card from '../../../components/atoms/card';
@@ -14,6 +14,7 @@ import Pagination from '../../../components/organisms/pagination';
 import {BACKEND_URL} from '../../../constants/config';
 import slugify from '../../../helpers/slugify';
 import {CommerceConnection} from '../../../interfaces/commerce';
+import MapMarker from '../../../components/atoms/map_marker';
 
 const NB_COMMERCES_PER_PAGES = 1;
 
@@ -70,6 +71,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 						node {
 							id
 							name
+							latitude
+							longitude
 							description
 							storekeeperWord
 						}
@@ -97,6 +100,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		props: {
 			totalCount: data.commerces.totalCount,
 			initialAddress: location ?? null,
+			initialLat: latitude ?? null,
+			initialLong: longitude ?? null,
 			commerces: data.commerces,
 			currentPage: page,
 		},
@@ -106,6 +111,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 interface ListCommercesProps {
 	totalCount: number
 	initialAddress?: string
+	initialLat?: number,
+	initialLong?: number,
 	commerces: CommerceConnection
 	currentPage: number
 }
@@ -116,7 +123,15 @@ interface ListCommercesProps {
  * @return {JSX.Element} La page de la liste des commerces
  */
 export default function ListCommerces(options: ListCommercesProps): JSX.Element {
-	const {totalCount, initialAddress, commerces, currentPage} = options;
+	const {totalCount, initialAddress, initialLat, initialLong, commerces, currentPage} = options;
+
+	const defaultMapProps = {
+		center: {
+			lat: initialLat ?? 48.1173,
+			lng: initialLong ?? -1.6778,
+		},
+		zoom: 11,
+	};
 
 	const onSearchForCommerce = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -148,7 +163,8 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 								<Link
 									key={commerce.node.id}
 									href={`
-									/commerces/${encodeURIComponent(commerce.node.id ?? '')}/${encodeURIComponent(slugify(commerce.node.storekeeperWord ?? ''))}
+									/commerces/${encodeURIComponent(commerce.node.id ?? '')}/
+									${encodeURIComponent(slugify(commerce.node.storekeeperWord ?? ''))}
 									`}
 								>
 									<a className='block w-full px-8'>
@@ -165,8 +181,19 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 							nbPage={totalCount / NB_COMMERCES_PER_PAGES}
 							uri={'/commerces/page/'} />
 					</div>
-					<div className='relative'>
-						<Image src="/temps_map.png" alt="L'image de la carte des commerces" layout='fill' objectFit='cover'/>
+					<div className='relative h-full'>
+						<GoogleMapReact
+							bootstrapURLKeys={{key: ''}}
+							defaultCenter={defaultMapProps.center}
+							defaultZoom={defaultMapProps.zoom}
+						>
+							{commerces.edges.map((commerce) => (
+								<MapMarker
+									key={commerce.node.id}
+									lat={commerce.node.latitude ?? 48.1173}
+									lng={commerce.node.longitude ?? -1.6778} />
+							))}
+						</GoogleMapReact>
 					</div>
 				</div>
 			</div>
