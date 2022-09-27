@@ -84,6 +84,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 						}
 					}
 				}
+				productsAvailableForClickAndCollect {
+					id
+				}
 			}
 		}
 		`,
@@ -138,7 +141,7 @@ export default function CommercePage(options: CommercePageProps) {
 			</div>
 
 			{/* Détails du commerce*/}
-			<div className='z-10 mt-[464px] bg-[#fafafa] w-full h-full grid gap-x-4 px-4 lg:px-16'>
+			<div className='z-10 mt-[464px] bg-[#fafafa] w-full h-full grid gap-x-4 mx-4 lg:mx-16'>
 				<div className='translate-y-[-100px] lg:col-start-1 lg:row-start-1 col-start-1 row-start-2 min-w-0 justify-end items-end content-end'>
 					<div className='lg:max-w-[700px] lg:ml-auto'>
 						<div className='h-4 lg:hidden' />
@@ -150,15 +153,21 @@ export default function CommercePage(options: CommercePageProps) {
 							<div className='overflow-x-auto'>
 								<div className='lg:grid lg:grid-cols-3 lg:gap-4 flex'>
 									{commerce.products?.edges.map((edge) => (
-										<>
+										<div key={edge.node.id}>
 											<Card
-												key={edge.node.id}
 												className='min-w-[187px] mix-blend-multiply'
 											>
-												<ProductCard product={edge.node} />
+												<ProductCard
+													commerceID={commerce.id}
+													product={edge.node}
+													isAvailableForClickAndCollect={
+														(commerce.productsAvailableForClickAndCollect ?? [])
+															.findIndex((product) => product.id == edge.node.id) >= 0
+													}
+												/>
 											</Card>
 											<div className='w-4 md:hidden sm:hidden' />
-										</>
+										</div>
 									))
 									}
 								</div>

@@ -1,5 +1,5 @@
 import {Address} from './address';
-import {ProductConnection} from './product';
+import {Product, ProductConnection} from './product';
 
 export interface CommerceConnection{
     totalCount: number;
@@ -19,7 +19,7 @@ export interface CommercePageInfo{
 }
 
 export interface Commerce{
-	id?: string;
+	id: string;
 	// storekeeper?: User;
 	name?: string;
 	description?: string;
@@ -37,7 +37,7 @@ export interface Commerce{
 	categories?: Array<string>;
 	products?: ProductConnection;
 	services?: Array<string>;
-	// productsAvailableForClickAndCollect?: Array<Product>;
+	productsAvailableForClickAndCollect?: Array<Product>;
 	// paniers?: PanierConnection;
 }
 

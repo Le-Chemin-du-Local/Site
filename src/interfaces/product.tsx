@@ -15,7 +15,7 @@ export interface ProductPageInfo{
 }
 
 export interface Product{
-	id?: string;
+	id: string;
 	name?: string;
 	description?: string;
 	price?: number;
@@ -24,4 +24,9 @@ export interface Product{
 	isBreton?: boolean;
 	tags?: Array<string>;
 	categories?: Array<string>;
+}
+
+export interface CCProduct {
+	quantity: number;
+	productID: string;
 }
