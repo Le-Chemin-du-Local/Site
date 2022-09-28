@@ -1,9 +1,12 @@
+import Router from 'next/router';
 import {useEffect, useState} from 'react';
 import ElevatedButton from '../../components/atoms/buttons/elevated_button';
 import Card from '../../components/atoms/card';
 import BasketCommerceBasket from '../../components/organisms/basket/basket_commerce_basket';
 import BasketPriceSummary from '../../components/organisms/basket/basket_price_summary';
 import Layout from '../../components/organisms/layout';
+import LoginPopUp from '../../components/organisms/popups/login_popup';
+import useUser from '../../helpers/useUser';
 import {Basket} from '../../interfaces/basket';
 import {CCProduct} from '../../interfaces/product';
 
@@ -15,6 +18,7 @@ export default function BasketPage(): JSX.Element {
 	const [basket, setBasket] = useState({commerces: []} as Basket);
 
 	const [showLoginPopup, setShowLoginPopup] = useState(false);
+	const {login} = useUser();
 
 	useEffect(() => {
 		if (localStorage.getItem('basket') != undefined) {
@@ -43,6 +47,11 @@ export default function BasketPage(): JSX.Element {
 
 	return (
 		<Layout title="Mon panier">
+			{/* On affiche le dialog de connexion/inscription si besoin */}
+			{login && !login.jwt && showLoginPopup &&
+				<LoginPopUp onSuccess={() => Router.push('/basket/horaires')} />
+			}
+
 			<div className='h-8 w-full' />
 			<div className='flex lg:flex-row flex-col w-full items-center lg:items-start justify-start lg:justify-center px-6 lg:px-16'>
 				<Card className='w-full lg:max-w-[700px] p-4'>
@@ -75,7 +84,11 @@ export default function BasketPage(): JSX.Element {
 							isDisabled={basket.commerces.length === 0}
 							label="Passer ma commande"
 							onClick={() => {
-
+								if (login && !login.jwt) {
+									setShowLoginPopup(true);
+								} else {
+									Router.push('/basket/horaires');
+								}
 							}} />
 					</div>
 				</div>
