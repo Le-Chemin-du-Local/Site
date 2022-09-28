@@ -96,3 +96,36 @@ export function basketRemoveProductToLocal(commerceID: string, productID: string
 	localStorage.setItem('basket', JSON.stringify(basket));
 	return basket;
 }
+
+
+/**
+ * Enlève un produit du panier (réduit sa quantité de 1)
+ * @param {string} commerceID L'ID du commerce
+ * @param {string} productID {string} L'ID du produit
+ * @return {Basket} Le nouveau panier
+ */
+export function basketDeleteProductToLocal(commerceID: string, productID: string): Basket {
+	let basket = {commerces: []} as Basket;
+
+	if (localStorage.getItem('basket') != undefined) {
+		basket = JSON.parse(localStorage.getItem('basket') ?? '');
+	}
+
+	const commerceIndex = basket.commerces.findIndex((commerce) => commerce.commerceID == commerceID);
+
+	if (commerceIndex >= 0) {
+		const productIndex = basket.commerces[commerceIndex].products?.findIndex((product) => product.productID == productID);
+
+		if (productIndex != undefined && productIndex >= 0) {
+			basket.commerces[commerceIndex].products!.splice(productIndex, 1);
+		}
+
+		// Si c'était le dernier produit on doit supprimer le commerce
+		if (basket.commerces[commerceIndex].products!.length <= 0) {
+			basket.commerces.splice(commerceIndex, 1);
+		}
+	}
+
+	localStorage.setItem('basket', JSON.stringify(basket));
+	return basket;
+}
