@@ -9,7 +9,7 @@ import ElevatedButton from '../components/atoms/buttons/elevated_button';
 import Card from '../components/atoms/card';
 import AddressInput from '../components/molecule/inputs/address_input';
 import CommerceCard from '../components/organisms/commerce/commerce_card';
-import Layout from '../components/organisms/layout';
+import HomeHeader from '../components/organisms/home_header';
 import {CommerceConnection} from '../interfaces/commerce';
 
 // eslint-disable-next-line require-jsdoc
@@ -69,11 +69,12 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 	};
 
 	return (
-		<Layout title='Bienvenue sur le Chemin du Local'>
+		<div>
 			<div className='
-				bg-illustration-4 bg-fixed bg-cover bg-center min-h-[94vh] w-full flex
+				bg-illustration-4 bg-fixed bg-cover bg-center min-h-[100vh] w-full flex
 			'>
-				<div className='px-8 lg:px-24 pt-[18vh] pb-8'>
+				<HomeHeader />
+				<div className='px-8 lg:px-24 pt-[20vh] pb-8'>
 					<Image
 						className='z-10'
 						src='/images/hermine.png'
@@ -207,6 +208,6 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 					/>
 				</div>
 			</div> */}
-		</Layout>
+		</div>
 	);
 }
