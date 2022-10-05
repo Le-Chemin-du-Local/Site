@@ -1,10 +1,11 @@
-import { gql } from '@apollo/client';
+import {gql} from '@apollo/client';
 import Image from 'next/image';
+import Router from 'next/router';
 import {useEffect, useState} from 'react';
 import clientWithHeader from '../../apollo/client_with_header';
 import {MenuSVG} from '../../assets/svg';
 import useUser from '../../helpers/useUser';
-import { User } from '../../interfaces/user';
+import {User} from '../../interfaces/user';
 import ElevatedButton from '../atoms/buttons/elevated_button';
 import Aside from './aside';
 

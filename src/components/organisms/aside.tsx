@@ -82,11 +82,6 @@ export default function Aside(options: AsideProps) {
 					<div className='h-8' />
 
 					<MenuButton
-						icon={<AccueilSVG/>}
-						label="Accueil"
-						href="/" />
-
-					<MenuButton
 						icon={<ClickAndCollectSVG/>}
 						label="Mon Panier"
 						href='/basket' />

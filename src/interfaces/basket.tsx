@@ -129,3 +129,26 @@ export function basketDeleteProductToLocal(commerceID: string, productID: string
 	localStorage.setItem('basket', JSON.stringify(basket));
 	return basket;
 }
+
+/**
+ * Change la date de click and collect pour un commerce
+ * @param {string} commerceID Le commerce dont on souhaite faire le changement
+ * @param {Date} pickupDate La nouvelle date
+ * @return {Basket} Le panier modifié
+ */
+export function basketUpdatePickupDateToLocal(commerceID: string, pickupDate?: Date) {
+	let basket = {commerces: []} as Basket;
+
+	if (localStorage.getItem('basket') != undefined) {
+		basket = JSON.parse(localStorage.getItem('basket') ?? '');
+	}
+
+	const commerceIndex = basket.commerces.findIndex((commerce) => commerce.commerceID == commerceID);
+
+	if (commerceIndex >= 0) {
+		basket.commerces[commerceIndex].pickupDate = pickupDate;
+	}
+
+	localStorage.setItem('basket', JSON.stringify(basket));
+	return basket;
+}
