@@ -19,9 +19,9 @@ interface OutlinedButtonProps {
  */
 export default function OutlinedButton(options: OutlinedButtonProps): JSX.Element {
 	const colors = {
-		text: 'text-white',
-		icon: 'fill-white',
-		border: 'bg-primary-color',
+		text: 'text-primary-color',
+		icon: 'fill-primary-color',
+		border: 'border-primary-color',
 	};
 
 	// On doit définir la couleur en fonction du type
