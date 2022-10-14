@@ -11,4 +11,13 @@ export interface User {
 	role?: RoleUser;
 	firstName?: string;
 	lastName?: string;
+	registeredPaymentMethods?: Array<RegisteredPaymentMethod>;
+	defaultPaymentMethod?: RegisteredPaymentMethod;
+}
+
+export interface RegisteredPaymentMethod{
+	name?: string;
+	stripeID?: string;
+	cardBrand?: string;
+	cardLast4Digits?: string;
 }

@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import {useEffect, useState} from 'react';
 import ElevatedButton from '../../components/atoms/buttons/elevated_button';
 import BasketCommerceSchedule from '../../components/organisms/basket/schedules/basket_commerce_schedule';
@@ -48,6 +49,9 @@ export default function HorairesPage(): JSX.Element {
 							{currentCommerceIndex == basket.commerces.length - 1 ? (
 								<ElevatedButton
 									isDisabled={currentDateIndex == -1}
+									onClick={() => {
+										Router.push('/basket/informations');
+									}}
 									label='Payer' />
 							) : (
 								<ElevatedButton
