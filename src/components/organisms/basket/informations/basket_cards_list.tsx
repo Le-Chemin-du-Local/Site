@@ -63,6 +63,11 @@ export default function BasketCardList(options: BasketCardsListProps): JSX.Eleme
 			))}
 			<div className='flex flex-row w-full justify-center'>
 				<OutlinedButton
+					label='Ajouter une carte'
+					onClick={() => setIsAddingCard(true)}
+				/>
+				<div className='w-4' />
+				<ElevatedButton
 					label='Choisir cette carte'
 					isDisabled={currentStripID == ''}
 					onClick={() => {
@@ -72,11 +77,6 @@ export default function BasketCardList(options: BasketCardsListProps): JSX.Eleme
 							onChoosedCard(cards[paymentMethodIndex]);
 						}
 					}}
-				/>
-				<div className='w-4' />
-				<ElevatedButton
-					label='Ajouter une carte'
-					onClick={() => setIsAddingCard(true)}
 				/>
 			</div>
 		</div>
