@@ -55,7 +55,7 @@ export default function ElevatedButton(options: ElevatedButtonProps): JSX.Elemen
 			<a
 				href={options.href}
 				className={
-					'p-2 px-4 block rounded-[8px] border border-1' +
+					'py-3 px-4 block rounded-[8px] border border-1' +
 					(!!options.isDisabled && 'cursor-default pointer-events-none') + ' ' +
 					(colors.background) + ' ' + (colors.border) + ' ' + (colors.text)
 				}
@@ -97,7 +97,7 @@ export default function ElevatedButton(options: ElevatedButtonProps): JSX.Elemen
 			type={options.isSubmitButton ? 'submit' : 'button'}
 			onClick={options.onClick}
 			className={
-				'p-2 px-4 rounded-[8px] border border-1' +
+				'py-3 px-4 rounded-[8px] border border-1' +
 				(!!options.isDisabled && 'cursor-default pointer-events-none') + ' ' +
 				(colors.background) + ' ' + (colors.border) + ' ' + (colors.text)
 			}
@@ -123,7 +123,7 @@ export default function ElevatedButton(options: ElevatedButtonProps): JSX.Elemen
 						<span className={options.icon ? 'ml-2' : ''}>{options.label}</span>
 					)}
 					{options.iconRight && (
-						<div className={`ml-2 h-5 w-5 ${colors.icon}`}>
+						<div className={`ml-2 h-6 w-6 ${colors.icon}`}>
 							{options.iconRight}
 						</div>
 					)}
