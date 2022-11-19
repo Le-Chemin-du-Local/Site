@@ -1,4 +1,5 @@
 import {ArrowForward} from '@mui/icons-material';
+import Image from 'next/image';
 import ElevatedButton from '../atoms/buttons/elevated_button';
 import AppStoreButton from '../atoms/buttons/stores/appstore_button';
 import PlayStoreButton from '../atoms/buttons/stores/playstore_button';
@@ -43,7 +44,7 @@ export default function BigCTA(): JSX.Element {
 				</div>
 				{/* <div className='translate-y-[-100px]'> */}
 				<div className='w-full lg:flex justify-center hidden'>
-					<img
+					<Image
 						className='block z-10 translate-y-[-168px]'
 						src="/images/mockup.png" alt="Application du Chemin du Local"
 						width={445} height={561} />
