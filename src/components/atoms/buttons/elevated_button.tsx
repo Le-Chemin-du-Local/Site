@@ -3,6 +3,7 @@ import Loading from '../loading';
 
 interface ElevatedButtonProps {
 	icon? : ReactNode
+	iconRight? : ReactNode
 	label? : string
 	onClick? : MouseEventHandler<HTMLButtonElement>
 	href? : string
@@ -72,12 +73,17 @@ export default function ElevatedButton(options: ElevatedButtonProps): JSX.Elemen
 					// Le contenue normal du bouton
 					<div className='flex items-center justify-center'>
 						{options.icon && (
-							<div className={`h-5 w-5 ${colors.icon}`}>
+							<div className={`h-6 w-6 ${colors.icon}`}>
 								{options.icon}
 							</div>
 						)}
 						{options.label && (
 							<span className={options.icon ? 'ml-2' : ''}>{options.label}</span>
+						)}
+						{options.iconRight && (
+							<div className={`ml-2 h-6 w-6 ${colors.icon}`}>
+								{options.iconRight}
+							</div>
 						)}
 					</div>
 				)}
@@ -115,6 +121,11 @@ export default function ElevatedButton(options: ElevatedButtonProps): JSX.Elemen
 					)}
 					{options.label && (
 						<span className={options.icon ? 'ml-2' : ''}>{options.label}</span>
+					)}
+					{options.iconRight && (
+						<div className={`ml-2 h-5 w-5 ${colors.icon}`}>
+							{options.iconRight}
+						</div>
 					)}
 				</div>
 			)}

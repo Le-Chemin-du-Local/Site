@@ -1,6 +1,9 @@
-import {ChangeEvent, FocusEventHandler, MouseEvent, Fragment, useState} from 'react';
+import {ChangeEvent, FocusEventHandler, MouseEvent, Fragment, useState, FormEvent} from 'react';
 import {BACKEND_URL} from '../../../constants/config';
 import {v4 as uuidv4} from 'uuid';
+import Image from 'next/image';
+import {Search} from '@mui/icons-material';
+import Router from 'next/router';
 
 interface AddressInputProps {
 	inputName: string;
@@ -26,6 +29,10 @@ export default function AddressInput(options: AddressInputProps) {
 
 	const [sessiontoken, setSessiontoken] = useState('');
 
+	const onSearchForCommerce = (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		Router.push(`/commerces/page/1?location=${encodeURIComponent(event.currentTarget.city.value)}`);
+	};
 
 	const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
 		const input = event.currentTarget.value as string;
@@ -74,46 +81,57 @@ export default function AddressInput(options: AddressInputProps) {
 		<div className='flex flex-col my-2 w-full'>
 			{label &&
 				<label className='text-dark-grey' htmlFor={inputName}>{label}</label>}
-			<div className='relative'>
-				<input
-					id={inputName}
-					name={inputName}
-					autoComplete="off"
-					onFocus={(event) => {
-						setSessiontoken(uuidv4());
-						if (onFocus != undefined) {
-							onFocus(event);
-						}
-					}}
-					onChange={onChange}
-					type={inputType}
-					placeholder={placeholder}
-					value={userInput}
-					required={isRequired}
-					className='border border-gray-300 border-solid outline-none p-2 rounded-lg w-full'
-				/>
-				{(showSuggestions && userInput.length > 0) && (
-					<>
-						{(filteredSuggestions.length > 0) ? (
-							<ul className='z-10 bg-white border border-[#999] max-h-40 overflow-y-auto absolute top-[40px] w-full'>
-								{filteredSuggestions.map((suggestion) => {
-									return (
-										<li
-											key={suggestion}
-											className='p-2 cursor-pointer hover:bg-secondary-color hover:text-white'
-											onClick={onClick}
-										>{suggestion}</li>
-									);
-								})}
-							</ul>
-						) : (
-							<div className='z-10 bg-white border border-[#999] max-h-40 overflow-y-auto absolute top-[40px] w-full'>
-								<p className='p-2'>Votre adresse n&apos;a pas été trouvée...</p>
-							</div>
-						)}
-					</>
-				)}
-			</div>
+			<form onSubmit={onSearchForCommerce}>
+				<div className='
+					relative bg-white border border-gray-300 border-solid outline-none p-2 rounded-full w-full flex flex-row
+					focus:border-2 focus:border-primary-color
+				'>
+					<Image src="/images/map_pointer.png" width={24} height={24} alt="Pointeur location" />
+					<div className='w-4' />
+
+					<input
+						id={inputName}
+						name={inputName}
+						autoComplete="off"
+						onFocus={(event) => {
+							setSessiontoken(uuidv4());
+							if (onFocus != undefined) {
+								onFocus(event);
+							}
+						}}
+						onChange={onChange}
+						type={inputType}
+						placeholder={placeholder}
+						value={userInput}
+						required={isRequired}
+						className="font-light w-full border-none focus:border-none outline-0 focus:outline-0"
+					/>
+
+					<Search className='text-primary-color w-[24px] h-[24px]' />
+
+					{(showSuggestions && userInput.length > 0) && (
+						<>
+							{(filteredSuggestions.length > 0) ? (
+								<ul className='z-10 bg-white border border-[#999] max-h-40 overflow-y-auto absolute top-[40px] w-full'>
+									{filteredSuggestions.map((suggestion) => {
+										return (
+											<li
+												key={suggestion}
+												className='p-2 cursor-pointer hover:bg-secondary-color hover:text-white'
+												onClick={onClick}
+											>{suggestion}</li>
+										);
+									})}
+								</ul>
+							) : (
+								<div className='z-10 bg-white border border-[#999] max-h-40 overflow-y-auto absolute top-[40px] w-full'>
+									<p className='p-2'>Votre adresse n&apos;a pas été trouvée...</p>
+								</div>
+							)}
+						</>
+					)}
+				</div>
+			</form>
 		</div>
 	);
 }

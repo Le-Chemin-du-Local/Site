@@ -7,9 +7,13 @@ import useUser from '../../helpers/useUser';
 import {User} from '../../interfaces/user';
 import clientWithHeader from '../../apollo/client_with_header';
 import {gql} from '@apollo/client';
+import {PersonOutline, ShoppingBagOutlined} from '@mui/icons-material';
+import AddressInput from '../molecule/inputs/address_input';
+import Image from 'next/image';
 
 interface HeaderProps {
     title? : string;
+	initialAddress?: string;
 }
 
 /**
@@ -18,7 +22,7 @@ interface HeaderProps {
  * @return {JSX.Element} Un header
  */
 export default function Header(options: HeaderProps): JSX.Element {
-	const {title} = options;
+	const {initialAddress} = options;
 
 	const [isAsideOpened, setAsideOpen] = useState(false);
 	const [user, setUser] = useState({} as User);
@@ -54,7 +58,7 @@ export default function Header(options: HeaderProps): JSX.Element {
 	}, [login]);
 
 	return (
-		<header className='w-full p-2 bg-white shadow-md flex justify-between items-center z-50 fixed top-0 h-16'>
+		<header className='w-full p-2 px-8 bg-white shadow-md flex justify-between items-center z-50 fixed top-0 h-20'>
 			<div className='flex items-center'>
 				<ElevatedButton
 					label="Menu"
@@ -68,9 +72,19 @@ export default function Header(options: HeaderProps): JSX.Element {
 						setOpen={setAsideOpen}
 					/>
 				)}
-				<p className='ml-4'>{title}</p>
+				<div className='relative lg:flex justify-center ml-6 hidden min-w-[144px]'>
+					<Image src="/logo.png" alt="Le logo du Chemin du Local" height={71} width={144} />
+				</div>
 			</div>
-			<div>
+			<div className='w-full px-8 lg:px-16'>
+				<AddressInput
+					isRequired
+					initialValue={initialAddress}
+					inputName='city'
+					placeholder='Où êtes vous en ce moment ?'
+				/>
+			</div>
+			<div className='lg:flex flex-row min-w-[290px] hidden'>
 				{login && login.jwt ? (
 					<>
 						<span className='mr-3'>{user.firstName}</span>
@@ -87,12 +101,18 @@ export default function Header(options: HeaderProps): JSX.Element {
 				) : (
 					<ElevatedButton
 						label='Se connecter'
-						color='secondary'
+						iconRight={<PersonOutline />}
 						// eslint-disable-next-line @typescript-eslint/no-unused-vars
 						onClick={(_) => {
 							Router.push('/login');
 						}} />
 				)}
+				<div className='w-4' />
+				<ElevatedButton
+					label='Panier'
+					iconRight={<ShoppingBagOutlined />}
+					// eslint-disable-next-line @typescript-eslint/no-unused-vars
+					href='/basket' />
 			</div>
 		</header>
 	);

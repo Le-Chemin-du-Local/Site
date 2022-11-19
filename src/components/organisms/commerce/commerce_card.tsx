@@ -1,7 +1,7 @@
+import {LocationOnOutlined} from '@mui/icons-material';
 import {BACKEND_URL} from '../../../constants/config';
 import slugify from '../../../helpers/slugify';
 import {Commerce} from '../../../interfaces/commerce';
-import ElevatedButton from '../../atoms/buttons/elevated_button';
 import ImageFallback from '../../atoms/image_fallback';
 
 interface CommerceCardProps {
@@ -17,7 +17,7 @@ export default function CommerceCard(options: CommerceCardProps): JSX.Element {
 	const {commerce} = options;
 
 	return (
-		<>
+		<a href={`/commerces/${encodeURIComponent(commerce.id ?? '')}/${encodeURIComponent(slugify(commerce.storekeeperWord ?? ''))}`}>
 			<div className='relative h-[214px] rounded-2xl'>
 				<ImageFallback
 					className='rounded-2xl'
@@ -31,12 +31,16 @@ export default function CommerceCard(options: CommerceCardProps): JSX.Element {
 				</span>
 			</div>
 			<div className='h-2' />
-			<p><strong>{commerce.address?.postalCode} - {commerce.address?.city}</strong></p>
+			<div className='flex justify-between items-center'>
+				<p>
+					<LocationOnOutlined className='w-6 h-6 mr-2 text-secondary-color' />
+					<strong>{commerce.address?.postalCode} - {commerce.address?.city}</strong>
+				</p>
+				<p className='px-4 py-2 rounded-full bg-secondary-color text-white font-bold'>
+					à 1,5km
+				</p>
+			</div>
 			<div className='h-2' />
-			<ElevatedButton
-				label='Découvrir le commerce'
-				href={`/commerces/${encodeURIComponent(commerce.id ?? '')}/${encodeURIComponent(slugify(commerce.storekeeperWord ?? ''))}`}
-			/>
-		</>
+		</a>
 	);
 }

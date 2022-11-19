@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import {Dispatch, MutableRefObject, SetStateAction, useEffect, useRef, useState} from 'react';
-import {AccueilSVG, ClickAndCollectSVG, RechercheCommercesSVG} from '../../assets/icons';
+import {ClickAndCollectSVG, RechercheCommercesSVG} from '../../assets/icons';
 import ElevatedButton from '../atoms/buttons/elevated_button';
 import MenuButton from '../molecule/menu_button';
 

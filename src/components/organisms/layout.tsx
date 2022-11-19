@@ -5,6 +5,7 @@ import Header from './header';
 interface LayoutProps{
 	children: ReactNode;
 	title: string;
+	initialAddress?: string;
 }
 
 /**
@@ -13,12 +14,12 @@ interface LayoutProps{
  * @return {JSX.Element} Un layout
  */
 export default function Layout(options : LayoutProps): JSX.Element {
-	const {children, title} = options;
+	const {children, title, initialAddress} = options;
 
 	return (
 		<>
-			<Header title={title}/>
-			<main className="flex flex-col items-center grow w-full mt-16">
+			<Header title={title} initialAddress={initialAddress} />
+			<main className="flex flex-col items-center grow w-full mt-20">
 				{children}
 			</main>
 			<Footer/>

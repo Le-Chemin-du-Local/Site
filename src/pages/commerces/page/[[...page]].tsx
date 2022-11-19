@@ -1,22 +1,16 @@
 import {gql} from '@apollo/client';
-import {Search} from '@mui/icons-material';
 import {GetServerSideProps} from 'next';
-import Router from 'next/router';
-import Link from 'next/link';
-import {FormEvent} from 'react';
 import GoogleMapReact from 'google-map-react';
 import client from '../../../apollo/client';
-import ElevatedButton from '../../../components/atoms/buttons/elevated_button';
 import Card from '../../../components/atoms/card';
-import AddressInput from '../../../components/molecule/inputs/address_input';
 import Layout from '../../../components/organisms/layout';
 import Pagination from '../../../components/organisms/pagination';
 import {BACKEND_URL} from '../../../constants/config';
-import slugify from '../../../helpers/slugify';
 import {CommerceConnection} from '../../../interfaces/commerce';
 import MapMarker from '../../../components/atoms/map_marker';
+import CommerceCard from '../../../components/organisms/commerce/commerce_card';
 
-const NB_COMMERCES_PER_PAGES = 1;
+const NB_COMMERCES_PER_PAGES = 2;
 
 // eslint-disable-next-line require-jsdoc
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -75,6 +69,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 							longitude
 							description
 							storekeeperWord
+							address{
+								id
+								number
+								route
+								optionalRoute
+								postalCode
+								city
+							}
 						}
 					}
 				}
@@ -133,47 +135,18 @@ export default function ListCommerces(options: ListCommercesProps): JSX.Element 
 		zoom: 11,
 	};
 
-	const onSearchForCommerce = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		Router.push(`/commerces/page/1?location=${encodeURIComponent(event.currentTarget.address.value)}`);
-	};
-
 	return (
-		<Layout title={'Commerce - page ' + (currentPage + 1)}>
+		<Layout title={'Commerce - page ' + (currentPage + 1)} initialAddress={initialAddress}>
 			<div className='w-full h-full'>
 				<div className='w-full h-full grid grid-cols-2 gap-1'>
 					<div className='w-full h-full flex flex-col items-center pt-4'>
-						<div className='flex-grow justify-center w-full'>
-							<form className='flex flex-row px-8 pt-2 pb-4' onSubmit={onSearchForCommerce}>
-								<AddressInput
-									isRequired
-									initialValue={initialAddress}
-									inputName='address'
-									placeholder='Où êtes vous en ce moment ?'
-								/>
-								<div className='w-4' />
-								<ElevatedButton
-									color='secondary'
-									label=''
-									icon={<Search />}
-									isSubmitButton
-								/>
-							</form>
+						<div className='justify-center px-8 w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-4'>
 							{commerces.edges.map((commerce) => (
-								<Link
+								<Card
 									key={commerce.node.id}
-									href={`
-									/commerces/${encodeURIComponent(commerce.node.id ?? '')}/
-									${encodeURIComponent(slugify(commerce.node.storekeeperWord ?? ''))}
-									`}
 								>
-									<a className='block w-full px-8'>
-										<Card className='mb-0'>
-											<h2 className='text-2xl'>{commerce.node.name ?? 'Nom inconnu'}</h2>
-											<span>{commerce.node.storekeeperWord ?? 'Le commerce n\'a pas d\'informations'}</span>
-										</Card>
-									</a>
-								</Link>
+									<CommerceCard commerce={commerce.node} />
+								</Card>
 							))}
 						</div>
 						<Pagination
