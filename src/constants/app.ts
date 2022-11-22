@@ -3,9 +3,11 @@ export const DEV_MODE = process.env.NODE_ENV !== 'production';
 
 // URL Application
 export const BACKEND_URL_DEV = 'http://localhost:8082';
+// export const BACKEND_URL_DEV = 'https://api-beta.chemin-du-local.bzh';
 export const BACKEND_URL_PROD = 'https://api-beta.chemin-du-local.bzh';
 
 export const APP_URL_DEV = 'http://localhost:3000';
+// export const APP_URL_DEV = 'https://app.chemin-du-local.bzh';
 export const APP_URL_PROD = 'https://app.chemin-du-local.bzh';
 
 // SECRETS

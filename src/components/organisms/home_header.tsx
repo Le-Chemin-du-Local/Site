@@ -1,5 +1,6 @@
 import {gql} from '@apollo/client';
 import {PersonOutline, ShoppingBagOutlined} from '@mui/icons-material';
+import {Link} from '@mui/material';
 import Image from 'next/image';
 import Router from 'next/router';
 import {useEffect, useState} from 'react';
@@ -65,7 +66,9 @@ export default function HomeHeader(): JSX.Element {
 					/>
 				)}
 				<div className='relative lg:flex justify-center ml-6 hidden min-w-[144px]'>
-					<Image src="/logo.png" alt="Le logo du Chemin du Local" height={71} width={144} />
+					<Link href="/">
+						<Image src="/logo.png" alt="Le logo du Chemin du Local" height={71} width={144} />
+					</Link>
 				</div>
 			</div>
 			<div className='w-full px-8 lg:px-16'>
