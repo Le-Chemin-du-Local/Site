@@ -113,7 +113,7 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 					<div className='h-12' />
 					<div className='w-full flex flex-col sm:flex-row justify-center items-center'>
 						{/* Etape 1 */}
-						<Card className='flex flex-col max-w-[316px] px-8 py-10 text-center'>
+						<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
 							<Image
 								src="/images/hermines/bof.png" alt="Hermine étape 1"
 								width={100} height={100} objectFit="contain" />
@@ -129,7 +129,7 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 						</Card>
 						<div className='w-[60px] h-4 lg:h-2 bg-primary-color' />
 
-						<Card className='flex flex-col max-w-[316px] px-8 py-10 text-center'>
+						<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
 							<Image
 								src="/images/hermines/contente.png" alt="Hermine étape 2"
 								width={100} height={100} objectFit="contain" />
@@ -145,7 +145,7 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 						</Card>
 						<div className='w-[60px] h-4 lg:h-2 bg-primary-color' />
 
-						<Card className='flex flex-col max-w-[316px] px-8 py-10 text-center'>
+						<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
 							<Image
 								src="/images/hermines/amour.png" alt="Hermine étape 3"
 								width={100} height={100} objectFit="contain" />
