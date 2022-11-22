@@ -165,7 +165,7 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 					<ElevatedButton
 						label='Découvrez le monde de Breizhine l’Hermine'
 						iconRight={<ArrowForward />}
-						href="/commerces/" />
+						href="/le-monde-de-breizhine-l-hermine/" />
 				</div>
 
 				<div className='flex flex-col items-center my-12'>

@@ -34,6 +34,7 @@ module.exports = {
 				'home-header': 'url("/images/homeheader.webp")',
 				'illustration-click-and-collect': 'url("/images/illustration_click_and_collect.png")',
 				'hero-pattern': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/homeheader.webp")',
+				'breizhine-header-pattern': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/breizhineheader.webp")',
 				'hero2': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/hero2.webp")',
 			},
 		},
