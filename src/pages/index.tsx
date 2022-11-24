@@ -66,7 +66,7 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 	return (
 		<>
 			<HomeHeader />
-			<main className="flex flex-col grow w-full px-8 py-4 mt-20">
+			<main className="flex flex-col items-center grow w-full px-8 py-4 mt-20">
 				{/* Le header */}
 				<div className='bg-hero-pattern bg-cover bg-center w-full flex rounded-xl font-bold'>
 					<div className='px-16 py-24 lg:py-[216px] lg:w-1/2'>
@@ -80,98 +80,99 @@ export default function Main(options: HomePagePropsProps): JSX.Element {
 					</div>
 				</div>
 
-				{/* La liste des commerces */}
-				<div className='flex flex-col items-center my-12'>
-					<div className='text-center max-w-[700px]'>
-						<h2 className='font-bold text-3xl'>Vos commerçants vous attendent</h2>
-						<div className='h-4' />
-						<p>
-							Maraîchers, ostréiculteurs, éleveurs, épiciers, apiculteurs et bien d’autres !
-							Ils sont tous là pour vous partager leur savoir-faire et leurs bons produits
-						</p>
+				<div className='max-w-max-content'>
+					{/* La liste des commerces */}
+					<div className='flex flex-col items-center my-12'>
+						<div className='text-center max-w-[700px]'>
+							<h2 className='font-bold text-3xl'>Vos commerçants vous attendent</h2>
+							<div className='h-4' />
+							<p>
+								Maraîchers, ostréiculteurs, éleveurs, épiciers, apiculteurs et bien d’autres !
+								Ils sont tous là pour vous partager leur savoir-faire et leurs bons produits
+							</p>
+						</div>
+						<div className='w-full flex flex-col lg:flex-row justify-center items-center'>
+							{commerces.edges.map((edge) => (
+								<Card
+									className='w-full lg:w-1/4 m-4'
+									key={edge.node.id}
+								>
+									<CommerceCard commerce={edge.node} />
+								</Card>
+							))}
+						</div>
+						<div className='h-6' />
+						<ElevatedButton
+							label='Voir tous les commerces'
+							iconRight={<ArrowForward />}
+							href="/commerces/" />
 					</div>
-					<div className='w-full flex flex-col lg:flex-row justify-center items-center'>
-						{commerces.edges.map((edge) => (
-							<Card
-								className='w-full lg:w-1/4 m-4'
-								key={edge.node.id}
-							>
-								<CommerceCard commerce={edge.node} />
+
+					{/* Le monde de Beizhy l'hermine */}
+					<div className='flex flex-col items-center my-12'>
+						<h2 className='font-bold text-3xl'>Consommez mieux, consommez local</h2>
+						<div className='h-12' />
+						<div className='w-full flex flex-col sm:flex-row justify-center items-center'>
+							{/* Etape 1 */}
+							<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
+								<Image
+									src="/images/hermines/bof.png" alt="Hermine étape 1"
+									width={100} height={100} objectFit="contain" />
+								<div className='h-4' />
+
+								<h3 className='font-bold text-xl'>Etape 1</h3>
+								<div className='h-4' />
+
+								<p>
+									Indiquez votre adresse et profitez de la liste des commerçants
+									locaux proches de votre emplacement
+								</p>
 							</Card>
-						))}
+							<div className='w-[60px] h-4 lg:h-2 bg-primary-color' />
+
+							<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
+								<Image
+									src="/images/hermines/contente.png" alt="Hermine étape 2"
+									width={100} height={100} objectFit="contain" />
+								<div className='h-4' />
+
+								<h3 className='font-bold text-xl'>Etape 2</h3>
+								<div className='h-4' />
+
+								<p>
+									Indiquez votre adresse et profitez de la liste des commerçants
+									locaux proches de votre emplacement
+								</p>
+							</Card>
+							<div className='w-[60px] h-4 lg:h-2 bg-primary-color' />
+
+							<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
+								<Image
+									src="/images/hermines/amour.png" alt="Hermine étape 3"
+									width={100} height={100} objectFit="contain" />
+								<div className='h-4' />
+
+								<h3 className='font-bold text-xl'>Etape 3</h3>
+								<div className='h-4' />
+
+								<p>
+									Indiquez votre adresse et profitez de la liste des commerçants
+									locaux proches de votre emplacement
+								</p>
+							</Card>
+						</div>
+						<div className='h-8' />
+
+						<ElevatedButton
+							label='Découvrez le monde de Breizhine l’Hermine'
+							iconRight={<ArrowForward />}
+							href="/le-monde-de-breizhine-l-hermine/" />
 					</div>
-					<div className='h-6' />
-					<ElevatedButton
-						label='Voir tous les commerces'
-						iconRight={<ArrowForward />}
-						href="/commerces/" />
-				</div>
 
-				{/* Le monde de Beizhy l'hermine */}
-				<div className='flex flex-col items-center my-12'>
-					<h2 className='font-bold text-3xl'>Consommez mieux, consommez local</h2>
-					<div className='h-12' />
-					<div className='w-full flex flex-col sm:flex-row justify-center items-center'>
-						{/* Etape 1 */}
-						<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
-							<Image
-								src="/images/hermines/bof.png" alt="Hermine étape 1"
-								width={100} height={100} objectFit="contain" />
-							<div className='h-4' />
-
-							<h3 className='font-bold text-xl'>Etape 1</h3>
-							<div className='h-4' />
-
-							<p>
-								Indiquez votre adresse et profitez de la liste des commerçants
-								locaux proches de votre emplacement
-							</p>
-						</Card>
-						<div className='w-[60px] h-4 lg:h-2 bg-primary-color' />
-
-						<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
-							<Image
-								src="/images/hermines/contente.png" alt="Hermine étape 2"
-								width={100} height={100} objectFit="contain" />
-							<div className='h-4' />
-
-							<h3 className='font-bold text-xl'>Etape 2</h3>
-							<div className='h-4' />
-
-							<p>
-								Indiquez votre adresse et profitez de la liste des commerçants
-								locaux proches de votre emplacement
-							</p>
-						</Card>
-						<div className='w-[60px] h-4 lg:h-2 bg-primary-color' />
-
-						<Card className='flex flex-col justify-center items-center max-w-[316px] px-8 py-10 text-center'>
-							<Image
-								src="/images/hermines/amour.png" alt="Hermine étape 3"
-								width={100} height={100} objectFit="contain" />
-							<div className='h-4' />
-
-							<h3 className='font-bold text-xl'>Etape 3</h3>
-							<div className='h-4' />
-
-							<p>
-								Indiquez votre adresse et profitez de la liste des commerçants
-								locaux proches de votre emplacement
-							</p>
-						</Card>
+					<div className='flex flex-col items-center my-12'>
+						<BigCTA />
 					</div>
-					<div className='h-8' />
-
-					<ElevatedButton
-						label='Découvrez le monde de Breizhine l’Hermine'
-						iconRight={<ArrowForward />}
-						href="/le-monde-de-breizhine-l-hermine/" />
 				</div>
-
-				<div className='flex flex-col items-center my-12'>
-					<BigCTA />
-				</div>
-
 			</main>
 			<Footer />
 			{/* <div className='w-full px-16 items-center'>

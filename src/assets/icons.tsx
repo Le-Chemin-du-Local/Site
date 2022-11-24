@@ -9,6 +9,7 @@ import CoinSVG from '../../public/svg/icons/coin.svg';
 import DrapeauBretonSVG from '../../public/svg/icons/drapeauBreton.svg';
 import EpicerieSVG from '../../public/svg/icons/epicerie.svg';
 import FruitsSVG from '../../public/svg/icons/fruits.svg';
+import HeartBretagneSVG from '../../public/svg/icons/heartBretagne.svg';
 import HermineSVG from '../../public/svg/icons/hermine.svg';
 import HorticultureSVG from '../../public/svg/icons/horticulture.svg';
 import LegumesSVG from '../../public/svg/icons/legumes.svg';
@@ -41,6 +42,7 @@ export {
 	DrapeauBretonSVG,
 	EpicerieSVG,
 	FruitsSVG,
+	HeartBretagneSVG,
 	HermineSVG,
 	HorticultureSVG,
 	LegumesSVG,

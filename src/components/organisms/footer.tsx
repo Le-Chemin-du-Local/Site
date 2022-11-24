@@ -11,16 +11,16 @@ import PlayStoreButton from '../atoms/buttons/stores/playstore_button';
 export default function Footer(): JSX.Element {
 	return (
 		<div className="bg-dark-grey text-white flex justify-center w-full px-8 lg:px-16 pt-16 pb-4">
-			<div className='max-w-[1700px] w-full flex flex-col justify-between'>
+			<div className='max-w-max-content w-full flex flex-col justify-between'>
 				<div className='flex flex-col lg:flex-row justify-between'>
 					{/* Les icones */}
-					<div className='py-2'>
+					<div className='py-2 max-w-[260px]'>
 						<Image
 							src="/images/logo_white.png"
 							alt="Logo du Chemin du Local"
 							width="882" height="354"
 							style={{
-								width: '50%',
+								width: '75%',
 								height: 'auto',
 							}}/>
 						<div className='h-4' />
@@ -46,7 +46,7 @@ export default function Footer(): JSX.Element {
 					<div className='py-2'>
 						<h2 className='text-primary-color text-2xl font-bold uppercase'>à propos</h2>
 						<div className='h-2' />
-						<a className='block my-1' href='/commerces'>Qui sommes nous ?</a>
+						<Link className='block my-1' href='/qui-sommes-nous'>Qui sommes nous ?</Link>
 						<a className='block my-1' href='/commerces'>Devenir commerçant</a>
 						<a className='block my-1' href='/contact'>Nous contacter</a>
 					</div>
