@@ -10,6 +10,7 @@ import {gql} from '@apollo/client';
 import {PersonOutline, ShoppingBagOutlined} from '@mui/icons-material';
 import AddressInput from '../molecule/inputs/address_input';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface HeaderProps {
     title? : string;
@@ -73,7 +74,9 @@ export default function Header(options: HeaderProps): JSX.Element {
 					/>
 				)}
 				<div className='relative lg:flex justify-center ml-6 hidden min-w-[144px]'>
-					<Image src="/logo.png" alt="Le logo du Chemin du Local" height={71} width={144} />
+					<Link href="/commerces">
+						<Image src="/logo.png" alt="Le logo du Chemin du Local" height={71} width={144} />
+					</Link>
 				</div>
 			</div>
 			<div className='w-full px-8 lg:px-16'>
