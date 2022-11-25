@@ -36,6 +36,7 @@ module.exports = {
 				'hero-pattern': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/homeheader.webp")',
 				'breizhine-header-pattern': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/breizhineheader.webp")',
 				'qui-sommes-nous-header-pattern': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/quisommesnousheader.webp")',
+				'devenir-commercant-header-pattern': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/devenircommercantheader.webp")',
 				'hero2': 'linear-gradient(90deg, #292929 0%, rgba(0, 0, 0, 0) 62.46%), url("/images/hero2.webp")',
 			},
 			maxWidth: {

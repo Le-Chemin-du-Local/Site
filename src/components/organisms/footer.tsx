@@ -47,8 +47,8 @@ export default function Footer(): JSX.Element {
 						<h2 className='text-primary-color text-2xl font-bold uppercase'>à propos</h2>
 						<div className='h-2' />
 						<Link className='block my-1' href='/qui-sommes-nous'>Qui sommes nous ?</Link>
-						<a className='block my-1' href='/commerces'>Devenir commerçant</a>
-						<a className='block my-1' href='/contact'>Nous contacter</a>
+						<Link className='block my-1' href='/devenir-commercant'>Devenir commerçant</Link>
+						<a className='block my-1' href='mailto:contact@chemin-du-local.bzh'>Nous contacter</a>
 					</div>
 
 					<div className='py-2'>
